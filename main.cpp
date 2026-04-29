@@ -1,58 +1,27 @@
-#include "raylib.h"
-#include "food.h"
-#include "snake.h"
+#include "gui.h"
+#include <cstdlib>
+#include <iostream>
+/*
+1. do a logic for a snake turns ( to prevent from 180 degrees movements) -- finished !!! YEAHH
+2. do a logic for a snake eating
+3. move all display logic to another gui class to take it away from main class -- finished !!! 
+*/
+int main(int argc, char *argv[]) {
+    int screenWidth;
+    int screenHeight;
 
-int main() {
-    const int screenWidth = 600;
-    const int screenHeight = 600;
-    const int gridSize = 50;
-
-    InitWindow(screenWidth, screenHeight, "Snake Game");
-
-    Food food;
-    Snake snake;
-    Color gridColor = BLACK; 
-    
-    double lastUpdateTime = 0;
-    SetTargetFPS(60);
-
-    while (!WindowShouldClose()) {
-        int key = GetKeyPressed();
-
-        switch (key) {
-            case KEY_UP:
-                snake.direction = {0, -1};
-                break;
-            case KEY_DOWN:
-                snake.direction = {0, 1};
-                break;
-            case KEY_LEFT:
-                snake.direction = {-1, 0};
-                break;
-            case KEY_RIGHT:
-                snake.direction = {1, 0};
-                break;
-        }
-        
-        if (GetTime() - lastUpdateTime >= 0.2) {
-            snake.Update();
-            lastUpdateTime = GetTime();
-        }
-        BeginDrawing();
-        ClearBackground(RAYWHITE);
-        for (int i = 0; i <= screenWidth; i += gridSize) {
-            DrawLine(i, 0, i, screenHeight, gridColor);
-        }
-        for (int i = 0; i <= screenHeight; i += gridSize) {
-            DrawLine(0, i, screenWidth, i, gridColor);
-        }
-
-        food.Draw();
-        snake.Draw();
-
-        EndDrawing();
+    if (argc == 2) {
+        screenWidth = atoi(argv[1]);
+        screenHeight = atoi(argv[1]);
+    } else if (argc == 3) {
+        screenWidth = atoi(argv[1]);
+        screenHeight = atoi(argv[2]);
+    } else if (argc > 3) {
+        std::cout << "Blednie podane argumenty!" << std::endl;
+        return -1;
     }
 
-    CloseWindow();
+    Gui gui(screenWidth, screenHeight);
+    gui.Display();
     return 0;
 }
