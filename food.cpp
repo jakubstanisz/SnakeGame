@@ -1,14 +1,19 @@
 #include "food.h"
+#include "gameconfig.h"
 #define GRIDSIZE 50
-Food::Food() {
-    Spawn();
+
+Food::Food(GameConfig& config) {
+    Spawn(config);
 }
 
-void Food::Spawn() {
-    position.x = GetRandomValue(0, 6);
-    position.y = GetRandomValue(0, 6);
+void Food::Spawn(GameConfig& config) {
+    int maxX = (config.getScreenWidth() / GRIDSIZE) - 1;
+    int maxY = (config.getScreenHeight() / GRIDSIZE) - 1;
+
+    position.x = GetRandomValue(0, maxX) * GRIDSIZE;
+    position.y = GetRandomValue(0, maxY) * GRIDSIZE;
 }
 
 void Food::Draw() {
-    DrawRectangle(position.x * GRIDSIZE, position.y * GRIDSIZE, GRIDSIZE, GRIDSIZE, BLUE);
+    DrawRectangle(position.x, position.y, GRIDSIZE, GRIDSIZE, BLUE);
 }

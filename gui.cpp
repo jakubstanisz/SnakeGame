@@ -1,24 +1,23 @@
 #include "gui.h"
 #include "raylib.h"
-
 #define gridSize 50
 
 Gui::Gui(int sW, int sH) 
     : screenWidth(sW), screenHeight(sH) {}
 
-void Gui::Display() {
-    Food food;
+void Gui::Display(GameConfig &config) {
+    InitWindow(screenWidth, screenHeight, "Snake Game");
+    SetTargetFPS(60);
+
+    Food food(config);
     Snake snake;
     Color gridColor = BLACK; 
     double lastUpdateTime = 0;
-    InitWindow(screenWidth, screenHeight, "Snake Game");
-    SetTargetFPS(60);
 
     while (!WindowShouldClose()) {
         int key = GetKeyPressed();
         Vector2 currentDirection = snake.direction;
-        // if in switch is to prevent changing 
-        // directions in 180 degrees i.e. from UP to DOWN in one frame
+        
         switch (key) {
             case KEY_UP: 
                 if (currentDirection.y != 1)
@@ -39,13 +38,13 @@ void Gui::Display() {
         }
 
         if (GetTime() - lastUpdateTime >= 0.2) {
-            snake.Update();
+            snake.Update(food, config);
             lastUpdateTime = GetTime();
         }
 
         BeginDrawing();
         ClearBackground(RAYWHITE);
-        // grid Drawing 
+        
         for (int i = 0; i <= screenWidth; i += gridSize) {
             DrawLine(i, 0, i, screenHeight, gridColor);
         }

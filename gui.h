@@ -9,5 +9,5 @@ public:
     int screenHeight;
     
     Gui(int screenWidth, int screenHeight);
-    void Display();
+    void Display(GameConfig &config);
 };

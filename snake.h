@@ -1,6 +1,8 @@
 #pragma once
 #include <deque>
+#include "gameconfig.h"
 #include "raylib.h"
+#include "food.h"
 
 class Snake{
 public:
@@ -10,6 +12,6 @@ public:
 
     Snake();
     void Draw();
-    void Update();
+    void Update(Food &food, GameConfig &config);
     void Reset();
 };
