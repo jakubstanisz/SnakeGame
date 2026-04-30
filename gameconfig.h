@@ -1,8 +1,8 @@
 #pragma once
 class GameConfig{
 private:
-    int screenWidth;
-    int screenHeight;
+    const int screenWidth;
+    const int screenHeight;
 public:
     GameConfig(int screenWidth, int screenHeight);
     int getScreenWidth();

@@ -1,5 +1,6 @@
 #include "food.h"
 #include "gameconfig.h"
+#include <raylib.h>
 #define GRIDSIZE 50
 
 Food::Food(GameConfig& config) {
@@ -15,5 +16,7 @@ void Food::Spawn(GameConfig& config) {
 }
 
 void Food::Draw() {
-    DrawRectangle(position.x, position.y, GRIDSIZE, GRIDSIZE, BLUE);
+    Image apple = LoadImage("apple.png");
+    Texture2D texture = LoadTextureFromImage(apple);
+    DrawTexture(texture, position.x + 1, position.y + 1, WHITE);
 }
