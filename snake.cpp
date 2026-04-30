@@ -16,9 +16,14 @@ void Snake::Draw(){
 
 void Snake::Update(Food& food, GameConfig &config){
     Vector2 newHead = body.front();
-    //obliczanie nowej pozycji
+    // calculating new position of a snake head
     newHead.x += direction.x * 50;
     newHead.y += direction.y * 50;
+    // checking if snake is out of the map, if true it resets game
+    if (newHead.x < 0 || newHead.x > config.getScreenWidth() 
+        || newHead.y < 0 || newHead.y > config.getScreenHeight()){
+        body.clear();
+    }
     body.push_front(newHead);
     if (food.position.x == newHead.x && food.position.y == newHead.y){
         addSegment = true;
@@ -26,10 +31,10 @@ void Snake::Update(Food& food, GameConfig &config){
     }
 
     if (addSegment){
-        //resetujemy na false zeby waz nie rosl w nieskonczonosc
+        //set on false to prevent infinity snake growth
         addSegment = false;
     } else {
-        //usuwamy dupe zeby dlugosc weza byla jednakowa
+        // clearing snake back to remain the same snake length
         body.pop_back();
     }
 }
