@@ -6,6 +6,7 @@
 1. do a logic for a snake turns ( to prevent from 180 degrees movements) -- finished !!! YEAHH
 2. do a logic for a snake eating --finished !!!
 3. move all display logic to another gui class to take it away from main class -- finished !!! 
+4. snake should eat himself if he goes on his tail -- finished !!!
 4. refactor directiories structure ( assets etc)
 */
 int main(int argc, char *argv[]) {

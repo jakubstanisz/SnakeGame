@@ -13,6 +13,8 @@ void Gui::Display(GameConfig &config) {
     Snake snake;
     Color gridColor = BLACK; 
     double lastUpdateTime = 0;
+    
+    bool gameStarted = false;
 
     while (!WindowShouldClose()) {
         int key = GetKeyPressed();
@@ -20,25 +22,37 @@ void Gui::Display(GameConfig &config) {
         
         switch (key) {
             case KEY_UP: 
-                if (currentDirection.y != 1)
-                snake.direction = {0, -1};
+                if (currentDirection.y != 1) {
+                    snake.direction = {0, -1};
+                    gameStarted = true;
+                }
                 break;
             case KEY_DOWN:
-                if (currentDirection.y != -1)
-                snake.direction = {0, 1};
+                if (currentDirection.y != -1) {
+                    snake.direction = {0, 1};
+                    gameStarted = true;
+                }
                 break;
             case KEY_LEFT:
-                if (currentDirection.x != 1)
-                snake.direction = {-1, 0};
+                if (currentDirection.x != 1) {
+                    snake.direction = {-1, 0};
+                    gameStarted = true;
+                }
                 break;
             case KEY_RIGHT:
-                if (currentDirection.x != -1) 
-                snake.direction = {1, 0};
+                if (currentDirection.x != -1) {
+                    snake.direction = {1, 0};
+                    gameStarted = true;
+                }
                 break;
         }
 
-        if (GetTime() - lastUpdateTime >= 0.2) {
-            snake.Update(food, config);
+        if (gameStarted) {
+            if (GetTime() - lastUpdateTime >= 0.2) {
+                snake.Update(food, config);
+                lastUpdateTime = GetTime();
+            }
+        } else {
             lastUpdateTime = GetTime();
         }
 

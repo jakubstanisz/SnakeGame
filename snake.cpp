@@ -19,10 +19,15 @@ void Snake::Update(Food& food, GameConfig &config){
     // calculating new position of a snake head
     newHead.x += direction.x * 50;
     newHead.y += direction.y * 50;
+    for (auto& segment : body){
+        if (newHead.x == segment.x && newHead.y == segment.y){
+            Reset();
+        }
+    }
     // checking if snake is out of the map, if true it resets game
     if (newHead.x < 0 || newHead.x > config.getScreenWidth() 
         || newHead.y < 0 || newHead.y > config.getScreenHeight()){
-        body.clear();
+        Reset();
     }
     body.push_front(newHead);
     if (food.position.x == newHead.x && food.position.y == newHead.y){
@@ -40,4 +45,6 @@ void Snake::Update(Food& food, GameConfig &config){
 }
 void Snake::Reset(){
     body.clear();
+    body.push_back(Vector2{300, 300});
+    direction = {1,0};
 }
