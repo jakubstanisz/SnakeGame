@@ -1,6 +1,6 @@
 #include "gui.h"
 #include "raylib.h"
-#define gridSize 50
+#define GRIDSIZE 50
 
 Gui::Gui(int sW, int sH) 
     : screenWidth(sW), screenHeight(sH) {}
@@ -59,11 +59,11 @@ void Gui::Display(GameConfig &config) {
         BeginDrawing();
         ClearBackground(RAYWHITE);
         
-        for (int i = 0; i <= screenWidth; i += gridSize) {
+        for (int i = 0; i <= screenWidth; i += GRIDSIZE) {
             DrawLine(i, 0, i, screenHeight, gridColor);
         }
 
-        for (int i = 0; i <= screenHeight; i += gridSize) {
+        for (int i = 0; i <= screenHeight; i += GRIDSIZE) {
             DrawLine(0, i, screenWidth, i, gridColor);
         }
 

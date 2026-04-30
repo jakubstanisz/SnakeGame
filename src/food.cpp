@@ -4,7 +4,19 @@
 #define GRIDSIZE 50
 
 Food::Food(GameConfig& config) {
+    //load image to ram
+    Image apple = LoadImage("assets/apple.png"); 
+
+    //load to vram
+    texture = LoadTextureFromImage(apple);
+
+    //clean from ram cuz we have it in vram
+    UnloadImage(apple);
     Spawn(config);
+}
+Food::~Food() {
+    // freeing memory in vram
+    UnloadTexture(texture);
 }
 
 void Food::Spawn(GameConfig& config) {
@@ -16,7 +28,5 @@ void Food::Spawn(GameConfig& config) {
 }
 
 void Food::Draw() {
-    Image apple = LoadImage("apple.png");
-    Texture2D texture = LoadTextureFromImage(apple);
     DrawTexture(texture, position.x + 1, position.y + 1, WHITE);
 }
