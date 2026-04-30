@@ -1,4 +1,5 @@
-## Snake Game Clone in C++ using Raylib
+# Snake Game Clone in C++ using Raylib
+![](/assets/git.gif)
 #### Useful links while setuping project:
 https://www.raylib.com/index.html
 https://github.com/raysan5/raylib/wiki
